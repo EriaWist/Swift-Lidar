@@ -3,7 +3,7 @@
 //  TestLidar
 //
 //  Created by 阿騰 on 2021/2/4.
-//
+//https://www.it-jim.com/blog/iphones-12-pro-lidar-how-to-get-and-interpret-data/
 
 import UIKit
 import RealityKit
@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         configuration.frameSemantics = .sceneDepth
         myDepthARView.session.run(configuration)
         
+        
+        
         // Do any additional setup after loading the view.
     }
     @objc func timerAction() {
@@ -38,6 +40,21 @@ class ViewController: UIViewController {
         let DepthData=myDepthARView.session.currentFrame?.sceneDepth
         let myCImage = CIImage(cvPixelBuffer: DepthData!.depthMap)
         myDepthImage.image = UIImage(ciImage: myCImage)
+        
+        
+        let depthData =  myDepthARView.session.currentFrame?.sceneDepth?.depthMap
+        if let depth = depthData{
+            let depthWidth = CVPixelBufferGetWidth(depth)
+            let depthHeight = CVPixelBufferGetHeight(depth)
+            CVPixelBufferLockBaseAddress(depth, CVPixelBufferLockFlags(rawValue: 0))
+            let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth), to: UnsafeMutablePointer<[Float32]>.self)
+            for y in 0...depthHeight-1 {
+                for x in 0...depthWidth-1 {
+//                    let distanceAtXYPoint = floatBuffer[10]
+                    print(floatBuffer)
+                }
+            }
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
            super.viewWillDisappear(animated)
