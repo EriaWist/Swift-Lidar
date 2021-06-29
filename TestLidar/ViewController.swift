@@ -11,6 +11,11 @@ import ARKit
 import Foundation
 
 class ViewController: UIViewController {
+    @IBOutlet weak var RD: UILabel!
+    @IBOutlet weak var RU: UILabel!
+    @IBOutlet weak var LU: UILabel!
+    @IBOutlet weak var MM: UILabel!
+    @IBOutlet weak var LD: UILabel!
     @IBAction func runDepthDataSwitch(_ sender: UISwitch) {
         if sender.isOn {
             timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
@@ -51,6 +56,18 @@ class ViewController: UIViewController {
             for y in 0...depthHeight-1 {
                 for x in 0...depthWidth-1 {
                     let distanceAtXYPoint = floatBuffer[y*depthWidth+x]
+                    if x==128&&y==96 {
+                        MM.text="x:\(x)y:\(y)距離\(distanceAtXYPoint)"
+                    }
+                    else if x==0&&y==0{
+                        LU.text="x :\(x)y:\(y)距離\(distanceAtXYPoint)"
+                    }else if x==255&&y==191{
+                        RU.text="x :\(x)y:\(y)距離\(distanceAtXYPoint)"
+                    }else if x==0&&y==191{
+                        LD.text="x:\(x)y:\(y)距離\(distanceAtXYPoint)"
+                    }else if x==254&&y==191{
+                        RD.text="x:\(x)y:\(y)距離\(distanceAtXYPoint)"
+                    }
                     print("x : \(x) y : \(y)距離\(distanceAtXYPoint)")
                 }
             }
@@ -61,4 +78,5 @@ class ViewController: UIViewController {
            timer.invalidate()
     }
 }
+
 
