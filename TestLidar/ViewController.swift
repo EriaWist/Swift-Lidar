@@ -47,11 +47,11 @@ class ViewController: UIViewController {
             let depthWidth = CVPixelBufferGetWidth(depth)
             let depthHeight = CVPixelBufferGetHeight(depth)
             CVPixelBufferLockBaseAddress(depth, CVPixelBufferLockFlags(rawValue: 0))
-            let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth), to: UnsafeMutablePointer<[Float32]>.self)
+            let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth), to: UnsafeMutablePointer<Float32>.self)
             for y in 0...depthHeight-1 {
                 for x in 0...depthWidth-1 {
-//                    let distanceAtXYPoint = floatBuffer[10]
-                    print(floatBuffer)
+                    let distanceAtXYPoint = floatBuffer[y*depthWidth+x]
+                    print("x : \(x) y : \(y)距離\(distanceAtXYPoint)")
                 }
             }
         }
