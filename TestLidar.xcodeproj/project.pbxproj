@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76562EDE2690233600F48A5F /* DepthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76562EDD2690233600F48A5F /* DepthData.swift */; };
+		76562EE126903FD400F48A5F /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76562EE026903FD400F48A5F /* Depth.swift */; };
 		76E7E51125CB027F00C6B746 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E7E51025CB027F00C6B746 /* AppDelegate.swift */; };
 		76E7E51325CB027F00C6B746 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E7E51225CB027F00C6B746 /* SceneDelegate.swift */; };
 		76E7E51525CB027F00C6B746 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E7E51425CB027F00C6B746 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		76562EDD2690233600F48A5F /* DepthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthData.swift; sourceTree = "<group>"; };
+		76562EE026903FD400F48A5F /* Depth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Depth.swift; sourceTree = "<group>"; };
 		76E7E50D25CB027F00C6B746 /* TestLidar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestLidar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E7E51025CB027F00C6B746 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76E7E51225CB027F00C6B746 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76562EDF26903F7E00F48A5F /* LidarDepth */ = {
+			isa = PBXGroup;
+			children = (
+				76562EDD2690233600F48A5F /* DepthData.swift */,
+				76562EE026903FD400F48A5F /* Depth.swift */,
+			);
+			path = LidarDepth;
+			sourceTree = "<group>";
+		};
 		76E7E50425CB027F00C6B746 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 		76E7E50F25CB027F00C6B746 /* TestLidar */ = {
 			isa = PBXGroup;
 			children = (
+				76562EDF26903F7E00F48A5F /* LidarDepth */,
 				76E7E51025CB027F00C6B746 /* AppDelegate.swift */,
 				76E7E51225CB027F00C6B746 /* SceneDelegate.swift */,
 				76E7E51425CB027F00C6B746 /* ViewController.swift */,
@@ -138,8 +152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				76E7E51525CB027F00C6B746 /* ViewController.swift in Sources */,
+				76562EDE2690233600F48A5F /* DepthData.swift in Sources */,
 				76E7E51125CB027F00C6B746 /* AppDelegate.swift in Sources */,
 				76E7E51325CB027F00C6B746 /* SceneDelegate.swift in Sources */,
+				76562EE126903FD400F48A5F /* Depth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
