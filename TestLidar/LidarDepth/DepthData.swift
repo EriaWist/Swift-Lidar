@@ -6,5 +6,14 @@
 //
 
 class DepthData {
-    var name = "Bart"
+    private var data = Array(repeating: Array(repeating: Float(-1), count: 192), count: 256)
+    func set(x:Int,y:Int,floatData:Float) -> Bool {
+         data[x][y]=floatData
+        return true
+    }
+    func get(x:Int,y:Int) -> Float {
+        return data[x][y]
+    }
+    
 }
+
