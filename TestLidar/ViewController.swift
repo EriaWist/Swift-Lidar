@@ -43,9 +43,9 @@ class ViewController: UIViewController {
             let data = depthData.getDepthDistance()
         MM.text="x:128y:96距離\(data.get(x: 128, y: 96))"
             LU.text="x :0y:0)距離\(data.get(x: 0, y: 0))"
-            RU.text="x :255y:191距離\(data.get(x: 255, y: 191))"
-            LD.text="x:255y:191距離\(data.get(x: 0, y: 191))"
-            RD.text="x:254y:191距離\(data.get(x: 254, y: 191))"
+            RU.text="x:255y:0距離\(data.get(x: 255, y: 0))"
+            LD.text="x:0y:191距離\(data.get(x: 0, y: 191))"
+            RD.text="x:255y:191距離\(data.get(x: 255, y: 191))"
             myDepthImage.image = depthData.getUIImage()
         }
     }
