@@ -3,7 +3,7 @@
 //  TestLidar
 //
 //  Created by 阿騰 on 2021/2/4.
-//https://www.it-jim.com/blog/iphones-12-pro-lidar-how-to-get-and-interpret-data/
+
 
 import UIKit
 import RealityKit
@@ -30,52 +30,28 @@ class ViewController: UIViewController {
     @IBAction func reDataDepth(_ sender: Any) {
         timerAction()
     }
+    var depthData:Depth?
     override func viewDidLoad() {
         super.viewDidLoad()
         let configuration = ARWorldTrackingConfiguration()
-        configuration.frameSemantics = .sceneDepth
-        myDepthARView.session.run(configuration)
-        
-        
-        
+        depthData = Depth(arARSession: myDepthARView.session, arConfiguration: configuration)
         // Do any additional setup after loading the view.
     }
     @objc func timerAction() {
         // execute change map setting
-        let DepthData=myDepthARView.session.currentFrame?.sceneDepth
-        let myCImage = CIImage(cvPixelBuffer: DepthData!.depthMap)
-        myDepthImage.image = UIImage(ciImage: myCImage)
-        
-        
-        let depthData =  myDepthARView.session.currentFrame?.sceneDepth?.depthMap
-        if let depth = depthData{
-            let depthWidth = CVPixelBufferGetWidth(depth)
-            let depthHeight = CVPixelBufferGetHeight(depth)
-            CVPixelBufferLockBaseAddress(depth, CVPixelBufferLockFlags(rawValue: 0))
-            let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth), to: UnsafeMutablePointer<Float32>.self)
-            for y in 0...depthHeight-1 {
-                for x in 0...depthWidth-1 {
-                    let distanceAtXYPoint = floatBuffer[y*depthWidth+x]
-                    if x==128&&y==96 {
-                        MM.text="x:\(x)y:\(y)距離\(distanceAtXYPoint)"
-                    }
-                    else if x==0&&y==0{
-                        LU.text="x :\(x)y:\(y)距離\(distanceAtXYPoint)"
-                    }else if x==255&&y==191{
-                        RU.text="x :\(x)y:\(y)距離\(distanceAtXYPoint)"
-                    }else if x==0&&y==191{
-                        LD.text="x:\(x)y:\(y)距離\(distanceAtXYPoint)"
-                    }else if x==254&&y==191{
-                        RD.text="x:\(x)y:\(y)距離\(distanceAtXYPoint)"
-                    }
-                    print("x : \(x) y : \(y)距離\(distanceAtXYPoint)")
-                }
-            }
+        if let depthData = depthData{
+            let data = depthData.getDepthDistance()
+        MM.text="x:128y:96距離\(data.get(x: 128, y: 96))"
+            LU.text="x :0y:0)距離\(data.get(x: 0, y: 0))"
+            RU.text="x :255y:191距離\(data.get(x: 255, y: 191))"
+            LD.text="x:255y:191距離\(data.get(x: 0, y: 191))"
+            RD.text="x:254y:191距離\(data.get(x: 254, y: 191))"
+            myDepthImage.image = depthData.getUIImage()
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
-           super.viewWillDisappear(animated)
-           timer.invalidate()
+        super.viewWillDisappear(animated)
+        timer.invalidate()
     }
 }
 
