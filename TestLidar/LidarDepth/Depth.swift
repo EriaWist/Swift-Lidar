@@ -8,26 +8,25 @@
 import ARKit
 class Depth {
     private let arARSession:ARSession
-    private let arConfiguration:ARConfiguration
-    private let depthData:ARDepthData?
+    private var depthData:ARDepthData?
     init(arARSession:ARSession,arConfiguration:ARConfiguration) {
         self.arARSession=arARSession
-        self.arConfiguration=arConfiguration
-        self.arConfiguration.frameSemantics = .sceneDepth
+        arConfiguration.frameSemantics = .sceneDepth
         arARSession.run(arConfiguration)
-        depthData=arARSession.currentFrame?.sceneDepth
+        depthData=arARSession.currentFrame?.sceneDepth        
     }
-    
+    //取得深度UIimage
     func getUIImage() -> UIImage {
-        if let depthData=self.depthData{
+        if let depthData=arARSession.currentFrame?.sceneDepth{
             let myCImage = CIImage(cvPixelBuffer: depthData.depthMap)
             return UIImage(ciImage: myCImage)
         }
         return UIImage()
     }
+    //取得詳細數據
     func getDepthDistance() -> DepthData {
-        var depthFloatData = DepthData()
-        if let depth = depthData?.depthMap{
+        let depthFloatData = DepthData()
+        if let depth = arARSession.currentFrame?.sceneDepth?.depthMap{
             let depthWidth = CVPixelBufferGetWidth(depth)
             let depthHeight = CVPixelBufferGetHeight(depth)
             CVPixelBufferLockBaseAddress(depth, CVPixelBufferLockFlags(rawValue: 0))
@@ -39,6 +38,8 @@ class Depth {
                 }
             }
         }
+           
+       
         
         
         return depthFloatData
